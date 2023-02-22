@@ -17,19 +17,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     echo "Selamat Datang";
-// });
-// Route::get('/about', function (){
-//     echo "2141720034 Widya Indah";
-// });
-// Route::get('/articles/{id}', function ($id){
-//     echo "Halaman Artikel dengan ID " .$id;
-// });
+Route::get('/home', [PageController::class, 'index']);
 
-//Route::get('/', [PageController::class, 'index']);
+Route::prefix('product')->group(function(){
+    Route::get('/list', [PageController::class, 'product']);
+});
 
-Route::get('/', [HomeController::class, 'index']);
-Route::get('/about', [AboutController::class, 'index']);
-Route::get('/articles/{id}', [ArticleController::class, 'index']);
+Route::get('/news/{param}', [PageController::class, 'news']);
+
+Route::prefix('program')->group(function(){
+    Route::get('/list', [PageController::class, 'program']);
+});
+
+Route::get('AboutUs', function(){
+    echo "Profile lengkap kami dapat di lihat pada link About Us berikut ini";
+    echo "
+    <ul>
+        <li>
+            <a href='https://www.educastudio.com/about-us'>About Us</a>
+        </li>
+    </ul>
+    ";
+});
+
+Route::resource('index', PageController::class);
 
