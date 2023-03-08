@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AboutUsController;
-use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\ArtikelModelController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsController;
@@ -47,3 +47,5 @@ Route::get('/profil', [ProfilController::class, 'index'])->name('profil');
 Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
 
 Route::get('/pengalaman', [PengalamanController::class, 'index'])->name('pengalaman');
+
+Route::get('/artikel', [ArtikelModelController::class, 'index']);
