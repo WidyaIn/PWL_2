@@ -14,8 +14,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        // $this->call([
+        //     ArtikelModelSeeder::class
+        // ]);
+
+        // $this->call([
+        //     HobiModelSeeder::class
+        // ]);
+
+        // $this->call([
+        //     KeluargaModelSeeder::class
+        // ]);
+
         $this->call([
-            ArtikelModelSeeder::class
+            MatakuliahModelSeeder::class
         ]);
     }
 }

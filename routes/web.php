@@ -4,7 +4,10 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\ArtikelModelController;
 use App\Http\Controllers\ContactUsController;
+use App\Http\Controllers\HobiModelController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\KeluargaModelController;
+use App\Http\Controllers\MatakuliahModelController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PengalamanController;
@@ -49,3 +52,9 @@ Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
 Route::get('/pengalaman', [PengalamanController::class, 'index'])->name('pengalaman');
 
 Route::get('/artikel', [ArtikelModelController::class, 'index']);
+
+Route::get('/hobi', [HobiModelController::class, 'index'])->name('hobi');
+
+Route::get('/keluarga', [KeluargaModelController::class, 'index'])->name('keluarga');
+
+Route::get('/matakuliah', [MatakuliahModelController::class, 'index'])->name('matakuliah');
