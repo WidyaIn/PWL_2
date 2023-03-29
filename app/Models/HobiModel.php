@@ -12,4 +12,8 @@ class HobiModel extends Model
     protected $table = 'hobi';
     protected $primarykey = 'kode';
     protected $keyType = 'string';
+
+    // protected $table = '';
+    // protected $primarykey = '';
+    // protected $keyType = '';
 }
