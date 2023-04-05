@@ -35,7 +35,7 @@
             </button>
           </div>
         </div>
-        <div class="card-body">
+        <div class="card-body"></div>
         <table class="table">
             <thead>
             <tr>

@@ -8,6 +8,7 @@ use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\HobiModelController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KeluargaModelController;
+use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\MatakuliahModelController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PageController;
@@ -45,6 +46,7 @@ Route::get('/tes', function(){
 Route::middleware(['auth'])->group(function(){
     // Route::get('/home', [HageController::class, 'index']);
 
+
     Route::prefix('product')->group(function(){
         Route::get('/list', [ProductController::class, 'product']);
     });
@@ -78,5 +80,7 @@ Route::middleware(['auth'])->group(function(){
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+    Route::resource('/mahasiswa', MahasiswaController::class);
 });
 

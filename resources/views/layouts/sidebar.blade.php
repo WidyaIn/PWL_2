@@ -86,6 +86,16 @@
             </a>
             </li>
 
+            <li class="nav-item">
+                <a href={{url('/mahasiswa')}} class="nav-link">
+                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                    <p>
+                    Mahasiswa
+                    {{-- <i class="right fas fa-angle-left"></i> --}}
+                    </p>
+                </a>
+                </li>
+
       </ul>
     </nav>
     <!-- /.sidebar-menu -->
