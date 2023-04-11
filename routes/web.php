@@ -71,16 +71,14 @@ Route::middleware(['auth'])->group(function(){
 
     Route::get('/artikel', [ArtikelModelController::class, 'index']);
 
-    Route::get('/hobi', [HobiModelController::class, 'index'])->name('hobi');
+    Route::resource('/hobi', HobiModelController::class);
 
-    Route::get('/keluarga', [KeluargaModelController::class, 'index'])->name('keluarga');
-
-    Route::get('/matakuliah', [MatakuliahModelController::class, 'index'])->name('matakuliah');
-
+    Route::resource('/matakuliah', MatakuliahModelController::class);
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
     Route::resource('/mahasiswa', MahasiswaController::class);
+    Route::resource('/keluarga', KeluargaModelController::class);
 });
 

@@ -36,28 +36,45 @@
           </div>
         </div>
         <div class="card-body">
-        <table class="table">
-            <thead>
-            <tr>
-                <th>Kode</th>
-                <th>Nama</th>
-                <th>Kota Kelahiran</th>
-                <th>Status</th>
-            </tr>
-            </thead>
-        <tbody>
 
-        @foreach ($klg as $kode => $k)
-            <tr>
-                <td>{{$kode}}</td>
-                <td>{{$k->nama}}</td>
-                <td>{{$k->kota_kelahiran}}</td>
-                <td>{{$k->status}}</td>
-            </tr>
-        @endforeach
-    </tbody>
-    </table>
-        </div>
+            <a href="{{url('keluarga/create')}}" class="btn btn-sm btn-success my-2">Tambah Data</a>
+
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>NIK</th>
+                  <th>NAMA</th>
+                  <th>KOTA KELAHIRAN</th>
+                  <th>STATUS</th>
+                </tr>
+              </thead>
+              <tbody>
+                @if($klg->count() > 0)
+                  @foreach($klg as $b => $k)
+                    <tr>
+                      <td>{{++$b}}</td>
+                      <td>{{$k->nik}}</td>
+                      <td>{{$k->nama}}</td>
+                      <td>{{$k->kota_kelahiran}}</td>
+                      <td>{{$k->status}}</td>
+                      <td>
+                        <!-- Bikin tombol edit dan delete -->
+                        <a href="{{ url('/keluarga/'. $k->id.'/edit') }}" class="btn btn-sm btn-warning">edit</a>
+
+                        <form method="POST" action="{{ url('/keluarga/'.$k->id) }}" >
+                          @csrf
+                          @method('DELETE')
+                          <button type="submit" class="btn btn-sm btn-danger">hapus</button>
+                        </form>
+                      </td>
+                    </tr>
+                  @endforeach
+                @else
+                  <tr><td colspan="6" class="text-center">Data tidak ada</td></tr>
+                @endif
+              </tbody>
+            </table>
+          </div>
         <!-- /.card-body -->
         <div class="card-footer">
           -copyright@WidyaIn-

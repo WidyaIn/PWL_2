@@ -16,25 +16,25 @@ class KeluargaModelSeeder extends Seeder
     {
         DB::table('keluarga')->insert([
             [
-                'kode'=>'K1',
+                'nik'=>'2221720067',
                 'nama'=>'Samulin',
                 'kota_kelahiran'=>'Malang',
                 'status'=>'Kepala Keluarga'
             ],
             [
-                'kode'=>'K2',
+                'nik'=>'2221720059',
                 'nama'=>'Muji Tri',
                 'kota_kelahiran'=>'Malang',
                 'status'=>'Istri'
             ],
             [
-                'kode'=>'K3',
+                'nik'=>'2221720012',
                 'nama'=>'Dessy Lutfiani',
                 'kota_kelahiran'=>'Prabumulih',
                 'status'=>'Anak'
             ],
             [
-                'kode'=>'K4',
+                'nik'=>'2221720044',
                 'nama'=>'Widya Indah Puspita Sari',
                 'kota_kelahiran'=>'Prabumulih',
                 'status'=>'Anak'

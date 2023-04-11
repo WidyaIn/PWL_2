@@ -57,7 +57,7 @@
             </li>
 
         <li class="nav-item">
-            <a href={{route('hobi')}} class="nav-link">
+            <a href={{url('/hobi')}} class="nav-link">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                 Hobi
@@ -67,7 +67,7 @@
             </li>
 
         <li class="nav-item">
-            <a href={{route('hobi')}} class="nav-link">
+            <a href={{url('/keluarga')}} class="nav-link">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                 Keluarga
@@ -77,7 +77,7 @@
             </li>
 
         <li class="nav-item">
-            <a href={{route('hobi')}} class="nav-link">
+            <a href={{url('/matakuliah')}} class="nav-link">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                 Matakuliah

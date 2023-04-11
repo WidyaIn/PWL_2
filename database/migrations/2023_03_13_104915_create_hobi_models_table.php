@@ -14,9 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('hobi', function (Blueprint $table) {
-            $table->string('kode', 2)->primary();
-            $table->string('nama', 50);
-            $table->string('hobi', 200);
+            $table->id();
+            $table->string('nim', 10)->unique();
+            $table->string('nama', 50)->nullable();
+            $table->string('hobi', 200)->nullable();
         });
     }
 

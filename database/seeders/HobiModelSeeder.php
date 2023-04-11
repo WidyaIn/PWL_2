@@ -17,18 +17,18 @@ class HobiModelSeeder extends Seeder
     {
         DB::table('hobi')->insert([
             [
-                'kode'=>'H1',
+                'nim'=>'2141720034',
                 'nama'=>'Widya Indah Puspita Sari',
                 'hobi'=>'Menonton film dan drama korea, mendengarkan lagu,
                          bermain basket dan berorganisasi'
             ],
             [
-                'kode'=>'H2',
+                'nim'=>'2141720035',
                 'nama'=>'Dhayu Intan',
                 'hobi'=>'Bermain piano, bernyanyi dan membuat puzzle'
             ],
             [
-                'kode'=>'H3',
+                'nim'=>'2141720036',
                 'nama'=>'Afifa Dwi',
                 'hobi'=>'Mendengarkan musik, menonton film dan bernyanyi'
             ]

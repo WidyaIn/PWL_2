@@ -10,6 +10,14 @@ class MatakuliahModel extends Model
     use HasFactory;
 
     protected $table = 'matakuliah';
-    protected $primarykey = 'kode';
+    public $timestamps = false;
+    protected $primarykey = 'id';
     protected $keyType = 'string';
+
+    protected $fillable =[
+        'nim',
+        'nama_mahasiswa',
+        'kelas',
+        'matakuliah'
+    ];
 }

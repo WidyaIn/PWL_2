@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -17,28 +16,28 @@ class MatakuliahModelSeeder extends Seeder
     {
         DB::table('matakuliah')->insert([
             [
-                'kode'=>'M1',
+                'nim'=>'2141720087',
                 'nama_mahasiswa'=>'Widya Indah Puspita Sari',
                 'kelas'=>'TI-2A',
                 'matakuliah'=>'Proyek 1, Manajemen proyek,
                                Jaringan Komputer, Pemograman Web Lanjut'
             ],
             [
-                'kode'=>'M2',
+                'nim'=>'2141720096',
                 'nama_mahasiswa'=>'Serli Putri Maharani',
                 'kelas'=>'TI-2H',
                 'matakuliah'=>'Proyek 1, Manajemen proyek,
                                Jaringan Komputer, Pemograman Web Lanjut'
             ],
             [
-                'kode'=>'M3',
+                'nim'=>'2141720054',
                 'nama_mahasiswa'=>'Chikal Nazmi',
                 'kelas'=>'SIB-2E',
                 'matakuliah'=>'Dasar Pemograman, Praktikum Dasar Pemograman
                                Agama Islam, Jaringan Kmputer'
             ],
             [
-                'kode'=>'M4',
+                'nim'=>'2141720032',
                 'nama_mahasiswa'=>'Shobri',
                 'kelas'=>'SIB-2E',
                 'matakuliah'=>'Dasar Pemograman, Praktikum Dasar Pemograman

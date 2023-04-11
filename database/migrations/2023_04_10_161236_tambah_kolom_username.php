@@ -13,13 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('matakuliah', function (Blueprint $table) {
-            $table->string('kode', 2)->primary();
-            $table->string('nama_mahasiswa', 50);
-            $table->string('kelas', 6);
-            $table->string('matakuliah', 200);
-
-        });
+        //
     }
 
     /**
@@ -29,6 +23,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('matakuliah');
+        //
     }
 };
