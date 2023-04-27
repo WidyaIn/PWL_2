@@ -5,6 +5,7 @@ use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\ArtikelModelController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ContactUsController;
+use App\Http\Controllers\FasilitasController;
 use App\Http\Controllers\HobiModelController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KeluargaModelController;
@@ -80,5 +81,7 @@ Route::middleware(['auth'])->group(function(){
 
     Route::resource('/mahasiswa', MahasiswaController::class);
     Route::resource('/keluarga', KeluargaModelController::class);
+
+    Route::resource('/fasilitas', FasilitasController::class);
 });
 

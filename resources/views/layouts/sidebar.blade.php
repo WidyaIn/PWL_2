@@ -96,6 +96,16 @@
                 </a>
                 </li>
 
+                <li class="nav-item">
+                    <a href={{url('/fasilitas')}} class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                        Fasilitas
+                        {{-- <i class="right fas fa-angle-left"></i> --}}
+                        </p>
+                    </a>
+                    </li>
+
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

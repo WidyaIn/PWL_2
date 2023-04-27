@@ -19,13 +19,13 @@ class ArtikelModelSeeder extends Seeder
                 'id' => 'P1',
                 'judul' => 'Pemograman Web',
                 'penulis' => 'Universitas Pasundan',
-                'tanggal_publis' => '2019-07-03'
+                'tanggal_publis' => '2019-07-04'
             ],
             [
                 'id' => 'P2',
                 'judul' => 'Apa itu Java?',
                 'penulis' => 'niagahoster.co.id',
-                'tanggal_publis' => '2021-08-25'
+                'tanggal_publis' => '2021-08-26'
             ],
             [
                 'id' => 'P3',
