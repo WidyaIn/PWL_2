@@ -45,25 +45,42 @@
                   <th>No</th>
                   <th>NIM</th>
                   <th>Nama</th>
+                  <th>Kelas</th>
                   <th>JK</th>
+                  <th>Tempat Lahir</th>
+                  <th>Tanggal Lahir</th>
+                  <th>Alamat</th>
                   <th>HP</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                @if($mhs->count() > 0)
-                  @foreach($mhs as $i => $m)
+                @if($mahasiswa ->count() > 0)
+                @foreach($mahasiswa as $i => $mhs)
+                    <tr>
+                      <td>{{++$i}}</td>
+                      <td>{{$mhs->nim}}</td>
+                      <td>{{$mhs->nama}}</td>
+                      <td>{{$mhs->kelas->nama_kelas}}</td>
+                      <td>{{$mhs->jk}}</td>
+                      <td>{{$mhs->tempat_lahir}}</td>
+                      <td>{{$mhs->tanggal_lahir}}</td>
+                      <td>{{$mhs->alamat}}</td>
+                      <td>{{$mhs->hp}}</td>
+                      <td>
+                  {{-- @foreach($mhs as $i => $m)
                     <tr>
                       <td>{{++$i}}</td>
                       <td>{{$m->nim}}</td>
                       <td>{{$m->nama}}</td>
                       <td>{{$m->jk}}</td>
                       <td>{{$m->hp}}</td>
-                      <td>
+                      <td> --}}
                         <!-- Bikin tombol edit dan delete -->
-                        <a href="{{ url('/mahasiswa/'. $m->id.'/edit') }}" class="btn btn-sm btn-warning">edit</a>
+                        <a href="{{ route('mahasiswa.show', [$mhs->nim]) }}" class="btn btn-sm btn-warning">show</a>
+                        <a href="{{ url('/mahasiswa/'. $mhs->id.'/edit') }}" class="btn btn-sm btn-warning">edit</a>
 
-                        <form method="POST" action="{{ url('/mahasiswa/'.$m->id) }}" >
+                        <form method="POST" action="{{ url('/mahasiswa/'.$mhs->id) }}" >
                           @csrf
                           @method('DELETE')
                           <button type="submit" class="btn btn-sm btn-danger">hapus</button>
