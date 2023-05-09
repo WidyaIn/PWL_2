@@ -6,6 +6,7 @@ use App\Models\Mahasiswa;
 use App\Models\MahasiswaModel;
 use Illuminate\Http\Request;
 use App\Models\Kelas;
+use App\Models\Mahasiswa_Matakuliah;
 
 class MahasiswaController extends Controller
 {
@@ -178,4 +179,16 @@ class MahasiswaController extends Controller
         return redirect('mahasiswa')
         ->with('success', 'Mahasiswa berhasil Dihapus');
     }
+
+    public function nilai($id)
+    {
+        // Join relasi ke mahasiswa dan mata kuliah
+        $mhs = MahasiswaModel::with('kelas', 'matakuliah')->where('id',$id)->first();
+        $matkul = Mahasiswa_Matakuliah::with('matakuliah', 'mahasiswa')->where('mahasiswa_id', $id)->get();
+        //dd($mhs[0]);
+        // Menampilkan nilai
+        return view('mahasiswa.nilai', compact('mhs', 'matkul'));
+    }
+
+
 }
