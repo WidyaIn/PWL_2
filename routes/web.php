@@ -83,5 +83,7 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('/keluarga', KeluargaModelController::class);
 
     Route::resource('/fasilitas', FasilitasController::class);
+
+    Route::get('mahasiswa/nilai/{id}', [MahasiswaController::class, 'nilai'])->name('nilai');
 });
 

@@ -42,10 +42,12 @@
             <table class="table table-bordered table-striped">
               <thead>
                 <tr>
-                  <th>NIM</th>
-                  <th>NAMA MAHASISWA</th>
-                  <th>KELAS</th>
-                  <th>MATAKULIAH</th>
+                  <th>No</th>
+                  <th>Nama Mata Kuliah</th>
+                  <th>SKS</th>
+                  <th>Jam</th>
+                  <th>Semester</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -53,10 +55,10 @@
                   @foreach($mtk as $a => $m)
                     <tr>
                       <td>{{++$a}}</td>
-                      <td>{{$m->nim}}</td>
-                      <td>{{$m->nama_mahasiswa}}</td>
-                      <td>{{$m->kelas}}</td>
-                      <td>{{$m->matakuliah}}</td>
+                      <td>{{$m->nama_matkul}}</td>
+                      <td>{{$m->sks}}</td>
+                      <td>{{$m->jam}}</td>
+                      <td>{{$m->semester}}</td>
                       <td>
                         <!-- Bikin tombol edit dan delete -->
                         <a href="{{ url('/matakuliah/'. $m->id.'/edit') }}" class="btn btn-sm btn-warning">edit</a>

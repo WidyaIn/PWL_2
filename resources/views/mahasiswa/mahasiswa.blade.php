@@ -68,18 +68,11 @@
                       <td>{{$mhs->alamat}}</td>
                       <td>{{$mhs->hp}}</td>
                       <td>
-                  {{-- @foreach($mhs as $i => $m)
-                    <tr>
-                      <td>{{++$i}}</td>
-                      <td>{{$m->nim}}</td>
-                      <td>{{$m->nama}}</td>
-                      <td>{{$m->jk}}</td>
-                      <td>{{$m->hp}}</td>
-                      <td> --}}
+
                         <!-- Bikin tombol edit dan delete -->
                         <a href="{{ route('mahasiswa.show', [$mhs->nim]) }}" class="btn btn-sm btn-warning">show</a>
                         <a href="{{ url('/mahasiswa/'. $mhs->id.'/edit') }}" class="btn btn-sm btn-warning">edit</a>
-
+                        <a href="{{ route('nilai', [$mhs->id]) }}" class="btn btn-sm btn-warning">Nilai</a>
                         <form method="POST" action="{{ url('/mahasiswa/'.$mhs->id) }}" >
                           @csrf
                           @method('DELETE')
