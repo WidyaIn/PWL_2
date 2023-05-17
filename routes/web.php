@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AboutUsController;
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\ArticlesController;
 use App\Http\Controllers\ArtikelModelController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ContactUsController;
@@ -37,24 +39,23 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 Route::get('logout', [LoginController::class, 'logout']);
-Route::get('/tes', function(){
-    echo Hash::make('1')."<br>";
-    echo Hash::make('1')."<br>";
-    echo Hash::make('1')."<br>";
-
+Route::get('/tes', function () {
+    echo Hash::make('1') . "<br>";
+    echo Hash::make('1') . "<br>";
+    echo Hash::make('1') . "<br>";
 });
 
-Route::middleware(['auth'])->group(function(){
+Route::middleware(['auth'])->group(function () {
     // Route::get('/home', [HageController::class, 'index']);
 
 
-    Route::prefix('product')->group(function(){
+    Route::prefix('product')->group(function () {
         Route::get('/list', [ProductController::class, 'product']);
     });
 
     Route::get('/news/{param}', [NewsController::class, 'news']);
 
-    Route::prefix('program')->group(function(){
+    Route::prefix('program')->group(function () {
         Route::get('/lis', [ProgramController::class, 'program']);
     });
 
@@ -85,5 +86,6 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('/fasilitas', FasilitasController::class);
 
     Route::get('mahasiswa/nilai/{id}', [MahasiswaController::class, 'nilai'])->name('nilai');
-});
 
+    Route::resource('articles', ArticlesController::class);
+});
