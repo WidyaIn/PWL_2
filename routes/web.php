@@ -88,4 +88,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('mahasiswa/nilai/{id}', [MahasiswaController::class, 'nilai'])->name('nilai');
 
     Route::resource('articles', ArticlesController::class);
+
+    Route::get('/article/cetak_pdf', [ArticlesController::class, 'cetak_pdf']);
 });

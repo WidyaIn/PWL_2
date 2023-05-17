@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+// use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use PDF;
 
 class ArticlesController extends Controller
 {
@@ -107,5 +109,13 @@ class ArticlesController extends Controller
      */
     public function destroy($id)
     {
+    }
+
+
+    public function cetak_pdf()
+    {
+        $articles = Article::all();
+        $pdf = PDF::loadview('articles.articles_pdf', ['articles' => $articles]);
+        return $pdf->stream();
     }
 }
