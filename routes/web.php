@@ -19,9 +19,11 @@ use App\Http\Controllers\PengalamanController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\ProgramController;
+use Doctrine\DBAL\Schema\Index;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -78,16 +80,18 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/matakuliah', MatakuliahModelController::class);
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
 
-    Route::resource('/mahasiswa', MahasiswaController::class);
-    Route::resource('/keluarga', KeluargaModelController::class);
+    Route::resource('/mahasiswa', MahasiswaController::class)->names('mahasiswa');
+    Route::resource('/keluarga', KeluargaModelController::class)->names('keluarga');
 
-    Route::resource('/fasilitas', FasilitasController::class);
+    Route::resource('/fasilitas', FasilitasController::class)->names('fasilitas');
 
-    Route::get('mahasiswa/nilai/{id}', [MahasiswaController::class, 'nilai'])->name('nilai');
+    Route::get('/mahasiswa/nilai/{id}', [MahasiswaController::class, 'nilai'])->name('nilai');
 
-    Route::resource('articles', ArticlesController::class);
+    Route::resource('/articles', ArticlesController::class)->names('articles');
 
     Route::get('/article/cetak_pdf', [ArticlesController::class, 'cetak_pdf']);
+
+    Route::get('/nilai_pdf/{id}', [MahasiswaController::class, 'cetak_pdf'])->name('cetak');
 });

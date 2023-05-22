@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Mahasiswa;
 use App\Models\MahasiswaModel;
 use Illuminate\Http\Request;
 use App\Models\Kelas;
 use App\Models\Mahasiswa_Matakuliah;
+// use Barryvdh\DomPDF\PDF;
+use Illuminate\Support\Facades\Storage;
+use PDF;
 
 class MahasiswaController extends Controller
 {
@@ -36,7 +38,7 @@ class MahasiswaController extends Controller
     public function create()
     {
         $kelas = Kelas::all(); //mendapatkan data dari tabel kelas
-        return view('mahasiswa.create_mahasiswa',['kelas' => $kelas, 'url_form' => route('mahasiswa.store') /*redirect()->url('')*/ ]);
+        return view('mahasiswa.create_mahasiswa', ['kelas' => $kelas, 'url_form' => route('mahasiswa.store') /*redirect()->url('')*/]);
 
         // return view('mahasiswa.create_mahasiswa')
         //     ->with('url_form', url('/mahasiswa'));
@@ -50,35 +52,47 @@ class MahasiswaController extends Controller
      */
     public function store(Request $request)
     {
-         //validasi
-         $request->validate([
+
+        //validasi
+        $request->validate([
             'nim' => 'required|string|max:10|unique:mahasiswa,nim',
             'nama' => 'required|string|max:50',
-            'Kelas' => 'required',
+            'kelas' => 'required',
             'jk' => 'required|in:l,p',
             'tempat_lahir' => 'required|string|max:50',
             'tanggal_lahir' => 'required|date',
             'alamat' => 'required|string|max:255',
             'hp' => 'required|digits_between:6,15',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
+
+        $foto_name = null;
+        if ($request->file('image')) {
+            $foto = $request->file('image');
+            $foto_name = time() . '_' . $foto->getClientOriginalName();
+            $foto_name = $request->file('image')->store('images', 'public');
+        }
 
         $mahasiswa = new MahasiswaModel;
         $mahasiswa->nim = $request->get('nim');
         $mahasiswa->nama = $request->get('nama');
-        $mahasiswa->kelas_id = $request->get('Kelas');
         $mahasiswa->jk = $request->get('jk');
         $mahasiswa->tempat_lahir = $request->get('tempat_lahir');
         $mahasiswa->tanggal_lahir = $request->get('tanggal_lahir');
         $mahasiswa->hp = $request->get('hp');
+        $mahasiswa->alamat = $request->get('alamat');
+        $mahasiswa->foto = $foto_name;
+        $mahasiswa->save();
 
-        $kelas = new Kelas;
-        $kelas->id = $request->get('Kelas');
+        $kelas = Kelas::find($request->get('kelas'));
 
         //fungsi eloquent untuk menambah data dengan relasi belongsTo
         $mahasiswa->kelas()->associate($kelas);
         $mahasiswa->save();
 
         // $data =MahasiswaModel::create($request->except(['_token']));
+
+
 
         //jika data berhasil ditambahkan, akan kembali ke halaman utama
         return redirect()->route('mahasiswa.index')
@@ -97,7 +111,7 @@ class MahasiswaController extends Controller
         //code sebelum dibuat relasi --> $mahasiswa = Mahasiswa::find($Nim)
         $mahasiswa = MahasiswaModel::with('kelas')->where('nim', $nim)->first();
 
-        return view('mahasiswa.detail', ['Mahasiswa' => $mahasiswa]);
+        return view('mahasiswa.detail')->with('mahasiswa', $mahasiswa);
     }
 
     /**
@@ -109,10 +123,10 @@ class MahasiswaController extends Controller
     public function edit($id)
     {
         //menampilkan detail data dengan menemukan berdasarkan id Mahasiswa untuk diedit
-        $mahasiswa = MahasiswaModel::with('kelas')->where('id', $id)->first();
+        $mhs = MahasiswaModel::with('kelas')->where('id', $id)->first();
         $kelas = Kelas::all(); //mendapatkan data dari tabel kelas
-        $url_form = route('mahasiswa.store');
-        return view('mahasiswa.create_mahasiswa', compact('mahasiswa', 'kelas', 'url_form'));
+        $url_form = route('mahasiswa.update', $id);
+        return view('mahasiswa.create_mahasiswa', compact('mhs', 'kelas', 'url_form'));
 
 
         // $mahasiswa = MahasiswaModel::find($id);
@@ -130,29 +144,42 @@ class MahasiswaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $mahasiswa = MahasiswaModel::where("id", "=", $id)->first();
+
         $request->validate([
-            'nim' => 'required|string|max:10|unique:mahasiswa,nim,'.$id,
+            'nim' => 'required|string|max:10|unique:mahasiswa,nim,' . $id,
             'nama' => 'required|string|max:50',
-            'Kelas' => 'required',
             'jk' => 'required|in:l,p',
             'tempat_lahir' => 'required|string|max:50',
             'tanggal_lahir' => 'required|date',
             'alamat' => 'required|string|max:255',
             'hp' => 'required|digits_between:6,15',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $mahasiswa = MahasiswaModel::with('kelas')->where('id', $id)->first;
+        $mahasiswa = MahasiswaModel::with('kelas')->where('id', $id)->first();
         $mahasiswa->nim = $request->get('nim');
         $mahasiswa->nama = $request->get('nama');
-        $mahasiswa->kelas_id = $request->get('Kelas');
+        $mahasiswa->foto = $request->get('foto');
         $mahasiswa->jk = $request->get('jk');
         $mahasiswa->tempat_lahir = $request->get('tempat_lahir');
         $mahasiswa->tanggal_lahir = $request->get('tanggal_lahir');
         $mahasiswa->hp = $request->get('hp');
+        $mahasiswa->alamat = $request->get('alamat');
+
+        $foto_name = null;
+        if ($mahasiswa->foto && file_exists(storage_path('app/public/' . $mahasiswa->foto))) {
+            Storage::delete(['public/' . $mahasiswa->foto]);;
+        }
+
+        $foto_name = $request->file('image')->store('images', 'public');
+        $mahasiswa->foto = $foto_name;
+
         $mahasiswa->save();
 
-        $kelas = new Kelas;
-        $kelas->id = $request->get('Kelas');
+        // $kelas = new Kelas;
+        // $kelas->id = $request->get('Kelas');
+        $kelas = Kelas::find($request->get('kelas'));
 
         //fungsi eloquent untuk mengupdate data dengan relasi belongsTo
         $mahasiswa->kelas()->associate($kelas);
@@ -177,18 +204,25 @@ class MahasiswaController extends Controller
     {
         MahasiswaModel::where('id', '=', $id)->delete();
         return redirect('mahasiswa')
-        ->with('success', 'Mahasiswa berhasil Dihapus');
+            ->with('success', 'Mahasiswa berhasil Dihapus');
     }
 
     public function nilai($id)
     {
         // Join relasi ke mahasiswa dan mata kuliah
-        $mhs = MahasiswaModel::with('kelas', 'matakuliah')->where('id',$id)->first();
+        $mhs = MahasiswaModel::with('kelas', 'matakuliah')->where('id', $id)->first();
         $matkul = Mahasiswa_Matakuliah::with('matakuliah', 'mahasiswa')->where('mahasiswa_id', $id)->get();
         //dd($mhs[0]);
         // Menampilkan nilai
         return view('mahasiswa.nilai', compact('mhs', 'matkul'));
     }
 
+    public function cetak_pdf($id)
+    {
+        $mhs = MahasiswaModel::find($id);
+        $mahasiswamatakuliah = Mahasiswa_Matakuliah::with('mahasiswa', 'matakuliah')->where('mahasiswa_id',  $id)->get();
 
+        $pdf = PDF::loadview('mahasiswa.nilai_pdf', ['mhs' => $mhs, 'mm' => $mahasiswamatakuliah]);
+        return $pdf->stream();
+    }
 }

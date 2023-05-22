@@ -45,12 +45,14 @@
                                 <th>No</th>
                                 <th>NIM</th>
                                 <th>Nama</th>
+                                <th>Foto</th>
                                 <th>Kelas</th>
                                 <th>JK</th>
                                 <th>Tempat Lahir</th>
                                 <th>Tanggal Lahir</th>
                                 <th>Alamat</th>
                                 <th>HP</th>
+                                {{-- <th>Foto</th> --}}
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -61,6 +63,12 @@
                                         <td>{{ ++$i }}</td>
                                         <td>{{ $mhs->nim }}</td>
                                         <td>{{ $mhs->nama }}</td>
+                                        <td>
+                                            @if ($mhs->foto)
+                                                <img style="max-width: 100px;max-height:100px"
+                                                    src="{{ url('storage') . '/' . $mhs->foto }}" />
+                                            @endif
+                                        </td>
                                         <td>{{ $mhs->kelas->nama_kelas }}</td>
                                         <td>{{ $mhs->jk }}</td>
                                         <td>{{ $mhs->tempat_lahir }}</td>
@@ -84,15 +92,6 @@
                                                         class="btn btn-sm btn-danger mr-2">DELETE</button>
                                                 </form>
                                             </div>
-
-                                            {{-- <a href="{{ route('mahasiswa.show', [$mhs->nim]) }}" class="btn btn-sm btn-warning">show</a>
-                        <a href="{{ url('/mahasiswa/'. $mhs->id.'/edit') }}" class="btn btn-sm btn-warning">edit</a>
-                        <a href="{{ route('nilai', [$mhs->id]) }}" class="btn btn-sm btn-warning">Nilai</a>
-                        <form method="POST" action="{{ url('/mahasiswa/'.$mhs->id) }}" >
-                          @csrf
-                          @method('DELETE')
-                          <button type="submit" class="btn btn-sm btn-danger">hapus</button>
-                        </form> --}}
                                         </td>
                                     </tr>
                                 @endforeach
